@@ -7,7 +7,7 @@ class BusquedaCancion extends Component {
         this.state = {
             music: [],
             query: '',
-            playlist:[]
+            
 
         }
         this.capturarInput = this.capturarInput.bind(this)

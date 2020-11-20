@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Nav from './components/navbar/Navbar'
+import FirmaComponent from './components/firma/FirmaComponent'
+import BuscarCancion from './components/busqueda/BuscarCancion'
+import ListaMusicComponent from './components/listamusic/ListaMusicComponent'
+// estilos
+import './app.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import { Row, Col } from 'react-bootstrap';
+
+import { Provider } from 'react-redux'
+import store from './store'
+
+
+
+class App extends Component {
+
+
+  constructor() {
+    super()
+    this.state = {
+      firma: []  //inicia con un arreglo vacio
+    }
+  }
+
+  addFirma(firma) {
+    this.setState({
+      firma: [...this.state.firma, firma]
+    })
+  }
+
+  render() {
+    return (
+
+      <Provider store={store}>
+        {/* music list navbar */}
+        <Row><Col className="menu_navegacion"><Nav /></Col></Row>
+        {/* //introducir firma-listar canciones-mostrar firma */}
+        <Row>
+
+          <Col className="lista_musica">
+            <Row> <Col className="firma_component"> <FirmaComponent /></Col></Row>
+          </Col>
+          <Col className="buscar_cancion"><Row><BuscarCancion/></Row></Col>
+          <Col><Row><ListaMusicComponent /></Row> </Col>
+        </Row>
+
+
+      </Provider>
+    )
+
+
+  }
+
 }
 
 export default App;
